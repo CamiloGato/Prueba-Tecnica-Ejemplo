@@ -1,14 +1,10 @@
-﻿using System;
-using ActiveZones2D.Scripts.NSActiveZones2D;
+﻿using GeneralsMiniGames;
 
 namespace MiniGameTest.Interactable
 {
 
-    public class Distractores : Objeto2D
+    public class Distractores : InteractableBase
     {
-        
-        public override Enum ActualStage { protected get; set; }
-        
         protected override void ComenzoSeleccionDeEsteObjeto()
         {
             
@@ -31,7 +27,7 @@ namespace MiniGameTest.Interactable
 
         public override void TabSobreEsteObjeto()
         {
-            
+            AttemptsCounter.Instance.AddAttempt();
         }
 
         protected override void TabSobreAlgunaZonaActivaDeEsteObjeto(string argNombreZonaActivaSobreLaQueSeHizoTab)

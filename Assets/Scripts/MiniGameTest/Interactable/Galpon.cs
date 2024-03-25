@@ -1,17 +1,54 @@
 ﻿using System;
 using ActiveZones2D.Scripts.NSActiveZones2D;
+using UnityEngine;
 
 namespace MiniGameTest.Interactable
 {
-    public class Galpon : Objeto2D
+    [Serializable]
+    public class GallinaTypeRender
     {
-        public override Enum ActualStage { protected get; set; }
+        public GallinaType type;
+        public GameObject gameObject;
+    }
+    
+    [Serializable]
+    public class GallinaGalponRender
+    {
+        public GallinaTypeRender[] gallinaRenders;
+        private GallinaType _currentType;
 
-        protected override void Awake()
+        public void ShowGallina(GallinaType gallinaType)
         {
-            base.Awake();
+            GetGallinaRenderByType(_currentType).gameObject.SetActive(false);
+            GetGallinaRenderByType(gallinaType).gameObject.SetActive(true);
+            _currentType = gallinaType;
         }
 
+        private GallinaTypeRender GetGallinaRenderByType(GallinaType type)
+        {
+            foreach (GallinaTypeRender gallinaTypeRender in gallinaRenders)
+            {
+                if (gallinaTypeRender.type == type)
+                {
+                    return gallinaTypeRender;
+                }
+            }
+
+            throw new Exception($"No Gallina Render for type {type}");
+        }
+    }
+    
+    public class Galpon : Objeto2D
+    {
+        public SpriteRenderer spriteRenderer;
+        public GallinaGalponRender gallinaTypeSprite;
+        
+        public override Enum ActualStage
+        {
+            protected get => actualStage;
+            set => actualStage = value;
+        }
+        
         protected override void ComenzoSeleccionDeEsteObjeto()
         {
             
@@ -46,5 +83,11 @@ namespace MiniGameTest.Interactable
         {
             
         }
+
+        public void ShowGallina(GallinaType type)
+        {
+            gallinaTypeSprite.ShowGallina(type);
+        }
+ 
     }
 }
