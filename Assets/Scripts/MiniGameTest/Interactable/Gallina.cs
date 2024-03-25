@@ -145,6 +145,8 @@ namespace MiniGameTest.Interactable
             yield return new WaitForSeconds(1f);
             
             gallinaConfig.ShowPlumas(false);
+            
+            Destroy(gameObject);
         }
         
     }
