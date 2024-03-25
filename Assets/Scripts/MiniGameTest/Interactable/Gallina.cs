@@ -71,6 +71,7 @@ namespace MiniGameTest.Interactable
         protected override void Awake()
         {
             base.Awake();
+            _canTouch = true;
             gallinaConfig.ShowPlumas(false);
             gallinaConfig.ShowState(GallinaConfig.GallinaState.Caminando);
         }

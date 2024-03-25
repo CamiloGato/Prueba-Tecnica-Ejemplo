@@ -27,7 +27,10 @@ namespace MiniGameTest.Challenges
     public class SpawnZoneBounds
     {
         public SpawnZoneKey[] spawnZoneKeys;
+        public float minDistance = 1.0f;
 
+        private List<Vector2> spawnedPoints = new List<Vector2>();
+        
         public GameObject SpawnObject(GameObject objectToSpawn, SpawnZoneType type)
         {
             var polygonCollider = GetPolygonColliderByType(type);
@@ -43,13 +46,15 @@ namespace MiniGameTest.Challenges
                 Random.Range(bounds.min.y, bounds.max.y)
             );
 
-            while (!polygonCollider.OverlapPoint(point))
+            while (!polygonCollider.OverlapPoint(point) || IsPointTooClose(point))
             {
                 point = new Vector2(
                     Random.Range(bounds.min.x, bounds.max.x),
                     Random.Range(bounds.min.y, bounds.max.y)
                 );
             }
+            
+            spawnedPoints.Add(point);
 
             return point;
         }
@@ -65,6 +70,19 @@ namespace MiniGameTest.Challenges
             }
 
             throw new Exception($"No existe una zona de spawn para el tipo {type}");
+        }
+        
+        private bool IsPointTooClose(Vector2 point)
+        {
+            foreach (Vector2 existingPoint in spawnedPoints)
+            {
+                if (Vector2.Distance(existingPoint, point) < minDistance)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
     
