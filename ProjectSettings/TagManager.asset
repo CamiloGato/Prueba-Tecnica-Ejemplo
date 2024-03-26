@@ -8,6 +8,8 @@ TagManager:
   - TextCountCoins
   - TextCountAttempts
   - TextLevelRank
+  - Board
+  - Atrapar
   layers:
   - Default
   - TransparentFX

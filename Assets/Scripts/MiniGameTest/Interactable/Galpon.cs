@@ -9,6 +9,7 @@ namespace MiniGameTest.Interactable
     {
         public GallinaType type;
         public GameObject gameObject;
+        
     }
     
     [Serializable]
