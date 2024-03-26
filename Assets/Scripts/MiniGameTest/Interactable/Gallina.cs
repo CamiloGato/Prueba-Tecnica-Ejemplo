@@ -3,6 +3,7 @@ using System.Collections;
 using GeneralsMiniGames;
 using iText.Layout;
 using MiniGameTest.Challenges;
+using TMPro;
 using UnityEngine;
 
 namespace MiniGameTest.Interactable
